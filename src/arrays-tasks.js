@@ -418,8 +418,16 @@ function getIdentityMatrix(/* n */) {
  *    getIndicesOfOddNumbers([2, 4, 6, 8, 10]) => []
  *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
  */
-function getIndicesOfOddNumbers(/* numbers */) {
-  throw new Error('Not implemented');
+function getIndicesOfOddNumbers(numbers) {
+  return numbers
+    .map((item, idx) => {
+      if (item % 2 !== 0) {
+        return idx;
+      }
+
+      return null;
+    })
+    .filter((item) => item !== null);
 }
 
 /**
@@ -432,8 +440,10 @@ function getIndicesOfOddNumbers(/* numbers */) {
  *    getHexRGBValues([ 0, 255, 16777215]) => [ '#000000', '#0000FF', '#FFFFFF' ]
  *    getHexRGBValues([]) => []
  */
-function getHexRGBValues(/* arr */) {
-  throw new Error('Not implemented');
+function getHexRGBValues(arr) {
+  return arr.map(
+    (num) => `#${num.toString(16).padStart(6, '0').toUpperCase()}`
+  );
 }
 
 /**
@@ -551,13 +561,25 @@ function sortDigitNamesByNumericOrder(/* arr */) {
  *     head     tail
  *
  *   swapHeadAndTail([ 1, 2 ]) => [ 2, 1 ]
+ *   swapHeadAndTail([1, 2, 3]) => [3, 2, 1]
  *   swapHeadAndTail([ 1, 2, 3, 4, 5, 6, 7, 8 ]) =>  [ 5, 6, 7, 8, 1, 2, 3, 4 ]
  *   swapHeadAndTail([ 1 ]) => [ 1 ]
  *   swapHeadAndTail([]) => []
  *
  */
-function swapHeadAndTail(/* arr */) {
-  throw new Error('Not implemented');
+function swapHeadAndTail(arr) {
+  const middle = Math.floor(arr.length / 2);
+  const head = arr.slice(0, middle);
+  const tail = arr.slice(-middle);
+
+  if (arr.length === 1) return arr;
+
+  if (arr.length % 2 === 1) {
+    const middleElement = arr[middle];
+    return tail.concat(middleElement, head);
+  }
+
+  return tail.concat(head);
 }
 
 module.exports = {
